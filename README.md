@@ -25,6 +25,8 @@ This repository is the official implementation of the paper [LBM: Latent Bridge 
 </p>
 
 
+## Abstract
+In this paper, we introduce Latent Bridge Matching (LBM), a new, versatile and scalable method that relies on Bridge Matching in a latent space to achieve fast image-to-image translation. We show that the method can reach state-of-the-art results for various image-to-image tasks using only a single inference step. In addition to its efficiency, we also demonstrate the versatility of the method across different image translation tasks such as object removal, normal and depth estimation, and object relighting. We also derive a conditional framework of LBM and demonstrate its effectiveness by tackling the tasks of controllable image relighting and shadow generation.
 
 ## Setup
 To be up and running, you need first to create a virtual env with at least python3.10 installed and activate it

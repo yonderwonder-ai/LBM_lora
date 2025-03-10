@@ -1,0 +1,6 @@
+*.ipynb
+*.png
+*.jpg
+*.pyc
+*.gradio
+*.safetensors

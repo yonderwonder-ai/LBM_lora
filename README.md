@@ -1,10 +1,10 @@
 # Latent Bridge Matching (LBM)
 
-This repository is the official implementation of the paper [LBM: Latent Bridge Matching for Fast Image-to-Image Translation](http://arxiv.org/abs/2406.02347).
+This repository is the official implementation of the paper [LBM: Latent Bridge Matching for Fast Image-to-Image Translation](http://arxiv.org/abs/2503.07535).
 
 <p align="center">
-    <a href="http://arxiv.org/abs/2406.02347">
-	    <img src='https://img.shields.io/badge/Paper-2406.02347-green' />
+    <a href="https://arxiv.org/abs/2503.07535">
+	    <img src='https://img.shields.io/badge/Paper-2503.07535-green' />
 	</a>
     <a href='https://creativecommons.org/licenses/by-nd/4.0/legalcode'>
 	    <img src="https://img.shields.io/badge/Licence-CC.BY.NC-purple" />

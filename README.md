@@ -65,12 +65,11 @@ This code is released under the Creative Commons BY-NC 4.0 license.
 
 ## Citation
 If you find this work useful or use it in your research, please consider citing us
-
-@misc{chadebec2025lbm,
+```bibtex
+@article{chadebec2025lbm,
       title={LBM: Latent Bridge Matching for Fast Image-to-Image Translation}, 
-      author={Clement Chadebec and Onur Tasar and Eyal Benaroche and Benjamin Aubin},
+      author={Clément Chadebec and Onur Tasar and Sanjeev Sreetharan and Benjamin Aubin},
       year={2025},
-      eprint={2406.02347},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+      journal = {arXiv preprint arXiv:2503.07535},
 }
+```

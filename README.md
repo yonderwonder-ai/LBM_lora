@@ -6,6 +6,9 @@ This repository is the official implementation of the paper [LBM: Latent Bridge 
     <a href="https://arxiv.org/abs/2503.07535">
 	    <img src='https://img.shields.io/badge/Paper-2503.07535-green' />
 	</a>
+	<a href="https://gojasper.github.io/latent-bridge-matching/">
+	    <img src='https://img.shields.io/badge/Project-page-blue' />
+	</a>
     <a href='https://creativecommons.org/licenses/by-nd/4.0/legalcode'>
 	    <img src="https://img.shields.io/badge/Licence-CC.BY.NC-purple" />
 	</a>

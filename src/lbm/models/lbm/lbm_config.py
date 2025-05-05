@@ -11,6 +11,15 @@ class LBMConfig(ModelConfig):
 
     Args:
 
+        source_key (str):
+            Key for the source image. Defaults to "source_image"
+
+        target_key (str):
+            Key for the target image. Defaults to "target_image"
+
+        mask_key (Optional[str]):
+            Key for the mask showing the valid pixels. Defaults to None
+
         latent_loss_type (str):
             Loss type to use. Defaults to "l2". Choices are "l2", "l1"
 
@@ -58,8 +67,8 @@ class LBMConfig(ModelConfig):
             List of probabilities for the selected timesteps if using `custom_timesteps` timestep sampling. Defaults to None
     """
 
-    source_key: str = "lr_image"
-    target_key: str = "image"
+    source_key: str = "source_image"
+    target_key: str = "target_image"
     mask_key: Optional[str] = None
     latent_loss_weight: float = 1.0
     latent_loss_type: Literal["l2", "l1"] = "l2"

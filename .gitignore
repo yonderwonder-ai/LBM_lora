@@ -1,6 +1,9 @@
 *.ipynb
 *.png
-*.jpg
 *.pyc
 *.gradio
 *.safetensors
+examples/inference/ckpts/*
+checkpoints/*
+checkpoints_mask_conditioning/*
+*.sh

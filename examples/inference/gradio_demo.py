@@ -7,6 +7,7 @@ import gradio as gr
 import numpy as np
 import PIL
 import torch
+from huggingface_hub import snapshot_download
 from PIL import Image
 from torchvision.transforms import ToPILImage, ToTensor
 from transformers import AutoModelForImageSegmentation
@@ -27,7 +28,11 @@ if not os.path.exists(os.path.join(PATH, "ckpts", "relighting")):
 else:
     model_dir = os.path.join(PATH, "ckpts", "relighting")
     logging.info(f"Loading relighting LBM model from local...")
-    model = get_model(model_dir, torch_dtype=torch.bfloat16, device="cuda")
+    model = get_model(
+        os.path.join(PATH, "ckpts", "relighting"),
+        torch_dtype=torch.bfloat16,
+        device="cuda",
+    )
 
 ASPECT_RATIOS = {
     str(512 / 2048): (512, 2048),
@@ -43,11 +48,19 @@ ASPECT_RATIOS = {
     str(1920 / 512): (1920, 512),
 }
 
-# model.to("cuda").to(torch.bfloat16)
 birefnet = AutoModelForImageSegmentation.from_pretrained(
     "ZhengPeng7/BiRefNet", trust_remote_code=True
 ).cuda()
 image_size = (1024, 1024)
+
+if not os.path.exists(os.path.join(PATH, "examples")):
+    logging.info(f"Downloading backgrounds from HF hub...")
+    _ = snapshot_download(
+        "jasperai/LBM_relighting",
+        repo_type="space",
+        allow_patterns="*.jpg",
+        local_dir=PATH,
+    )
 
 
 def evaluate(
@@ -95,7 +108,18 @@ def evaluate(
 
 
 with gr.Blocks(title="LBM Object Relighting") as demo:
-    title = gr.HTML("<h1>LBM Object Relighting</h1>")
+    gr.Markdown(
+        f"""
+        # Object Relighting with Latent Bridge Matching
+        This is an interactive demo of [LBM: Latent Bridge Matching for Fast Image-to-Image Translation](https://arxiv.org/abs/2503.07535) *by Jasper Research*. This demo is based on the [LBM relighting checkpoint](https://huggingface.co/jasperai/LBM_relighting).
+    """
+    )
+    gr.Markdown(
+        """
+        If you enjoy the space, please also promote *open-source* by giving a ⭐ to the <a href='https://github.com/gojasper/LBM' target='_blank'>Github Repo</a>.
+        """
+    )
+
     with gr.Row():
         with gr.Column():
             with gr.Row():
@@ -129,7 +153,12 @@ with gr.Blocks(title="LBM Object Relighting") as demo:
                 # height=450,
                 object_fit="contain",
                 label="Background List",
-                value=[path for path in glob.glob("examples/backgrounds/*.jpg")],
+                value=[
+                    path
+                    for path in glob.glob(
+                        os.path.join(PATH, "examples/backgrounds/*.jpg")
+                    )
+                ],
                 columns=5,
                 allow_preview=False,
             )

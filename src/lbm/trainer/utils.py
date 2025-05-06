@@ -7,37 +7,6 @@ from typing import Dict, List, Literal, Optional, Tuple
 import torch
 
 
-def setup_logging(
-    output_dir: str,
-    dir_logs: str,
-    logger_id: str,
-    logger_name: str = "logger",
-    level=logging.INFO,
-) -> Tuple[logging.Logger, str]:
-    path_logs = os.path.join(output_dir, dir_logs)
-    os.makedirs(path_logs, exist_ok=True)
-    log_file = os.path.join(path_logs, logger_id + ".log")
-
-    # get logger
-    logger = logging.getLogger(logger_name)
-
-    # log in file
-    fileHandler = logging.FileHandler(log_file, mode="w")
-    logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
-    fileHandler.setFormatter(logFormatter)
-    logger.addHandler(fileHandler)
-
-    # log in console
-    consoleHandler = logging.StreamHandler()
-    logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
-    consoleHandler.setFormatter(logFormatter)
-    logger.addHandler(consoleHandler)
-
-    logger.setLevel(level)
-    logger.info(f"Logging in {log_file}")
-    return logger, log_file
-
-
 class StateDictAdapter:
     """
     StateDictAdapter for adapting the state dict of a model to a checkpoint state dict.

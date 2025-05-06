@@ -4,6 +4,7 @@
 *.gradio
 *.safetensors
 examples/inference/ckpts/*
+examples/inference/examples/*
+envs/*
 checkpoints/*
-checkpoints_mask_conditioning/*
 *.sh

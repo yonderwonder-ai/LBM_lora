@@ -46,6 +46,9 @@ In this paper, we introduce Latent Bridge Matching (LBM), a new, versatile and s
 		<img style="width:600px;" src="assets/LBM.jpg">
 </p>
 
+## License
+This code is released under the **Creative Commons BY-NC 4.0 license**.
+
 ## Considered Use-cases
 We validate the method on various use-cases such as object relighting, image restoration, object removal, depth and normal maps estimation as well as controllable object relighting and shadow generation.
 <details>
@@ -60,7 +63,7 @@ For object relighting, the method should translate the encoded source images cre
 <details>
     <summary><b>Image Restoration 🧹 </b></summary>
 	<p>
-In the context of image restoration, the method must transport the distribution of the degraded images to the distribution of the clean images.
+In the context of image restoration, the method shall transport the distribution of the degraded images to the distribution of the clean images.
 </p>
     <p align="center">
             <img style="width:600px;" src="assets/upscaler.jpg">
@@ -121,22 +124,36 @@ pip install -e .
 We provide in `examples` a simple script to perform depth and normal estimation using the proposed method. 
 
 ```bash
-python examples/inference/inference.py --model_name [depth|normals|relighting] --source_image path_to_your_image.jpg --output_path output_images
+python examples/inference/inference.py \
+--model_name [depth|normals|relighting] \
+--source_image path_to_your_image.jpg \
+--output_path output_images
 ```
 
 See the trained models on the HF Hub 🤗
-- [Normals Ckpt](https://huggingface.co/jasperai/LBM_normals)
-- [Depth Ckpt](https://huggingface.co/jasperai/LBM_depth)
-- [Relighting Ckpt](https://huggingface.co/jasperai/LBM_relighting)
+- [Surface normals Checkpoint](https://huggingface.co/jasperai/LBM_normals)
+- [Depth Checkpoint](https://huggingface.co/jasperai/LBM_depth)
+- [Relighting Checkpoint](https://huggingface.co/jasperai/LBM_relighting)
+
+## Local Gradio Demo 
+To run the local gradio demo, just run the following command:
+```bash
+python examples/inference/gradio_demo.py
+```
+It will download the pretrained model from the HF Hub as well as example images.
 
 ## Training
-We provide in `examples\training` an example of a script to train a LBM for surface normal predictions on [`hypersim`](https://github.com/apple/ml-hypersim) see [this](https://github.com/prs-eth/Marigold/blob/main/script/dataset_preprocess/hypersim/README.md) for data processing. In `examples\trainig\configs`, you will find the configuration `yaml` associated to the training script. The only thing you need to do is to amend the `SHARDS_PATH_OR_URLS` section of the `yaml` so the model is trained on your own data. Please note that this package uses [`webdataset`](https://github.com/webdataset/webdataset) to handle the datastream and so the urls you use should be fomatted according to the  [`webdataset format`](https://github.com/webdataset/webdataset?tab=readme-ov-file#the-webdataset-format). In particular, for this example, each sample in your `.tar` files needs to be composed of a `jpg` file containing the image, a `normal.png` file containing the target normals as well as a `mask.png` containing a mask indicating the valid pixels 
+We provide in `examples\training` an example of a script to train a LBM for surface normal predictions on [`hypersim`](https://github.com/apple/ml-hypersim) see [this](https://github.com/prs-eth/Marigold/blob/main/script/dataset_preprocess/hypersim/README.md) for data processing. 
+
+In `examples\trainig\configs`, you will find the configuration `yaml` associated to the training script. The only thing you need to do is to amend the `SHARDS_PATH_OR_URLS` section of the `yaml` so the model is trained on your own data. 
+
+Please note that this package uses [`webdataset`](https://github.com/webdataset/webdataset) to handle the datastream and so the urls you use should be fomatted according to the  [`webdataset format`](https://github.com/webdataset/webdataset?tab=readme-ov-file#the-webdataset-format). In particular, for this example, each sample in your `.tar` files needs to be composed of a `jpg` file containing the image, a `normal.png` file containing the target normals as well as a `mask.png` containing a mask indicating the valid pixels 
 
 ```
 sample = {
     "jpg": source_image,
     "normal.png": normals # target_image
-	"mask.png": mask # mask of valid pixels
+    "mask.png": mask # mask of valid pixels
 }
 ```
 
@@ -147,9 +164,6 @@ python examples/training/train_lbm_surface.py examples/training/config/surface.y
 ```
 
 *Note*: Make sure to update the relevant section of the `yaml` file to use your own data and log the results on your own [WandB](https://wandb.ai/site).
-
-## License
-This code is released under the **Creative Commons BY-NC 4.0 license**.
 
 ## Citation
 If you find this work useful or use it in your research, please consider citing us

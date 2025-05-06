@@ -43,8 +43,6 @@ from lbm.trainer import TrainingConfig, TrainingPipeline
 from lbm.trainer.loggers import WandbSampleLogger
 from lbm.trainer.utils import StateDictAdapter
 
-##################### MODEL #####################
-
 
 def get_model(
     backbone_signature: str = "stabilityai/stable-diffusion-xl-base-1.0",
@@ -178,7 +176,7 @@ def get_model(
         subfolder="vae",
         tiling_size=(128, 128),
     )
-    vae = AutoencoderKLDiffusers(vae_config).to(torch.bfloat16)
+    vae = AutoencoderKLDiffusers(vae_config)
     vae.freeze()
     vae.to(torch.bfloat16)
 
@@ -416,17 +414,17 @@ def main(
         batch_size=batch_size,
     )
 
-    train_parameters = ["denoiser."]
+    train_parameters = ["denoiser.*"]
 
     # Training Config
     training_config = TrainingConfig(
-        learning_rates=[learning_rate],
-        lr_schedulers_name=[learning_rate_scheduler],
-        lr_schedulers_kwargs=[learning_rate_scheduler_kwargs],
+        learning_rate=learning_rate,
+        lr_scheduler_name=learning_rate_scheduler,
+        lr_scheduler_kwargs=learning_rate_scheduler_kwargs,
         log_keys=["image", "normal", "mask"],
-        trainable_params=[train_parameters],
-        optimizers_name=[optimizer],
-        optimizers_kwargs=[optimizer_kwargs],
+        trainable_params=train_parameters,
+        optimizer_name=optimizer,
+        optimizer_kwargs=optimizer_kwargs,
         log_samples_model_kwargs={
             "input_shape": None,
             "num_steps": num_steps,

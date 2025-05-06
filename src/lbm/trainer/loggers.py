@@ -47,7 +47,7 @@ def create_grid_texts(
         draw = ImageDraw.Draw(img)
         margin_ = margin
         offset_ = offset
-        for line in text_wrap(
+        for line in wrap_text(
             text=text, draw=draw, max_width=image_size[0] - 2 * margin_, font=font
         ):
             draw.text((margin_, offset_), line, font=font, fill="black")
@@ -65,11 +65,12 @@ def create_grid_texts(
     return grid
 
 
-def text_wrap(
+def wrap_text(
     text: str, draw: ImageDraw.Draw, max_width: int, font: ImageFont
 ) -> List[str]:
     """
     Wrap text to fit within a specified width when drawn.
+    It will return to the new line when the text is larger than the max_width.
 
     Args:
         text (str): The text to be wrapped.
@@ -81,18 +82,14 @@ def text_wrap(
         List[str]: List of wrapped lines.
     """
     lines = []
-    if draw.textbbox((0, 0), text, font=font)[2] <= max_width:
-        lines.append(text)
-    else:
-        words = text.split(" ")
-        while words:
-            line = ""
-            while (
-                words
-                and draw.textbbox((0, 0), line + words[0], font=font)[2] <= max_width
-            ):
-                line = line + (words.pop(0) + " ")
-            lines.append(line)
+    current_line = ""
+    for letter in text:
+        if draw.textbbox((0, 0), current_line + letter, font=font)[2] <= max_width:
+            current_line += letter
+        else:
+            lines.append(current_line)
+            current_line = letter
+    lines.append(current_line)
     return lines
 
 

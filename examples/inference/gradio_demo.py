@@ -16,6 +16,8 @@ from utils import extract_object, resize_and_center_crop
 from lbm.inference import get_model
 
 PATH = os.path.dirname(os.path.abspath(__file__))
+os.environ["GRADIO_TEMP_DIR"] = ".gradio"
+
 
 if not os.path.exists(os.path.join(PATH, "ckpts", "relighting")):
     logging.info(f"Downloading relighting LBM model from HF hub...")

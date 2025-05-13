@@ -1,6 +1,10 @@
 *.ipynb
 *.png
-*.jpg
 *.pyc
 *.gradio
 *.safetensors
+examples/inference/ckpts/*
+examples/inference/examples/*
+envs/*
+checkpoints/*
+*.sh

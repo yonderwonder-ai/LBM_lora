@@ -1,6 +1,6 @@
 accelerate==1.4.0
 diffusers==0.32.2
-torch==2.5.0
+torch==2.7.0
 torchvision>=0.20.0
 black==24.2.0
 einops==0.7.0

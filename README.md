@@ -1,4 +1,4 @@
-# Latent Bridge Matching (LBM)
+# Latent Bridge Matching (LBM) - ICCV 2025
 
 This repository is the official implementation of the paper [LBM: Latent Bridge Matching for Fast Image-to-Image Translation](http://arxiv.org/abs/2503.07535).
 

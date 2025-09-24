@@ -1,0 +1,10 @@
+architecture: LBM
+base_model: stabilityai/stable-diffusion-xl-base-1.0
+change_threshold: 0.001
+conv_rank: 16
+coverage_percentage: 100.0%
+extraction_method: all_layers_analysis
+native_naming: true
+rank: 32
+total_analyzed_layers: 792
+total_lora_modules: 792

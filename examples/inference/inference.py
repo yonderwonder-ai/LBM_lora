@@ -1,13 +1,18 @@
 import argparse
 import logging
 import os
+import sys
 
 import torch
 from PIL import Image
 
-from lbm.inference import evaluate, get_model
-
 PATH = os.path.dirname(os.path.abspath(__file__))
+
+# Add the src directory to Python path to find lbm module
+src_path = os.path.join(os.path.dirname(os.path.dirname(PATH)), "src")
+sys.path.insert(0, src_path)
+
+from lbm.inference import evaluate, get_model
 
 logging.basicConfig(level=logging.INFO)
 
@@ -19,7 +24,7 @@ parser.add_argument(
     "--model_name",
     type=str,
     default="normals",
-    choices=["normals", "depth", "relighting"],
+    choices=["normals", "depth", "relighting", "sdxl_lbm_hybrid"],
 )
 
 

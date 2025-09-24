@@ -1,0 +1,11 @@
+# Exclude large model files
+exact_base.ckpt
+*.safetensors
+*.ckpt
+*.jpg
+*.png
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo

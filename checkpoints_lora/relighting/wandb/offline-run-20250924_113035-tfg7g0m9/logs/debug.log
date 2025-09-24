@@ -1,0 +1,24 @@
+2025-09-24 11:30:35,754 INFO    MainThread:514542 [wandb_setup.py:_flush():81] Current SDK version is 0.22.0
+2025-09-24 11:30:35,754 INFO    MainThread:514542 [wandb_setup.py:_flush():81] Configure stats pid to 514542
+2025-09-24 11:30:35,754 INFO    MainThread:514542 [wandb_setup.py:_flush():81] Loading settings from /home/sougata/.config/wandb/settings
+2025-09-24 11:30:35,754 INFO    MainThread:514542 [wandb_setup.py:_flush():81] Loading settings from /home/sougata/LBM/wandb/settings
+2025-09-24 11:30:35,754 INFO    MainThread:514542 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-09-24 11:30:35,754 INFO    MainThread:514542 [wandb_init.py:setup_run_log_directory():686] Logging user logs to ./checkpoints_lora/relighting/wandb/offline-run-20250924_113035-tfg7g0m9/logs/debug.log
+2025-09-24 11:30:35,754 INFO    MainThread:514542 [wandb_init.py:setup_run_log_directory():687] Logging internal logs to ./checkpoints_lora/relighting/wandb/offline-run-20250924_113035-tfg7g0m9/logs/debug-internal.log
+2025-09-24 11:30:35,754 INFO    MainThread:514542 [wandb_init.py:init():813] calling init triggers
+2025-09-24 11:30:35,754 INFO    MainThread:514542 [wandb_init.py:init():818] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-09-24 11:30:35,754 INFO    MainThread:514542 [wandb_init.py:init():861] starting backend
+2025-09-24 11:30:36,190 INFO    MainThread:514542 [wandb_init.py:init():864] sending inform_init request
+2025-09-24 11:30:36,194 INFO    MainThread:514542 [wandb_init.py:init():872] backend started and connected
+2025-09-24 11:30:36,197 INFO    MainThread:514542 [wandb_init.py:init():942] updated telemetry
+2025-09-24 11:30:36,420 INFO    MainThread:514542 [wandb_init.py:init():966] communicating run to backend with 90.0 second timeout
+2025-09-24 11:30:36,424 INFO    MainThread:514542 [wandb_init.py:init():1017] starting run threads in backend
+2025-09-24 11:30:36,578 INFO    MainThread:514542 [wandb_run.py:_console_start():2506] atexit reg
+2025-09-24 11:30:36,578 INFO    MainThread:514542 [wandb_run.py:_redirect():2354] redirect: wrap_raw
+2025-09-24 11:30:36,578 INFO    MainThread:514542 [wandb_run.py:_redirect():2423] Wrapping output streams.
+2025-09-24 11:30:36,578 INFO    MainThread:514542 [wandb_run.py:_redirect():2446] Redirects installed.
+2025-09-24 11:30:36,580 INFO    MainThread:514542 [wandb_init.py:init():1057] run started, returning control to user process
+2025-09-24 11:30:37,202 INFO    MainThread:514542 [wandb_run.py:_config_callback():1392] config_cb None None {'pipeline_config': "TrainingConfig(name='TrainingConfig', experiment_id=None, optimizer_name='AdamW', optimizer_kwargs={}, learning_rate=0.0002, lr_scheduler_name=None, lr_scheduler_kwargs={}, lr_scheduler_interval='step', lr_scheduler_frequency=1, metrics=None, tracking_metrics=None, backup_every=50, trainable_params=['.*'], log_keys=['source_image', 'target_image'], log_samples_model_kwargs={'num_steps': [1, 2, 4]})", 'verbose': False, 'model_config': {'name': 'LBMConfig', 'input_key': 'image', 'source_key': 'source_image', 'target_key': 'source_image_paste', 'mask_key': None, 'latent_loss_weight': 1.0, 'latent_loss_type': 'l2', 'pixel_loss_type': 'lpips', 'pixel_loss_max_size': 512, 'pixel_loss_weight': 10.0, 'timestep_sampling': 'custom_timesteps', 'logit_mean': None, 'logit_std': None, 'selected_timesteps': [250.0, 500.0, 750.0, 1000.0], 'prob': [0.25, 0.25, 0.25, 0.25], 'bridge_noise_sigma': 0.005}, 'lora_config': {'rank': 32, 'alpha': 32, 'target_modules': ['attn1', 'attn2', 'ff.net', 'up_blocks', 'down_blocks'], 'trainable_modules': ['attn1', 'attn2', 'up_blocks']}, 'config_yaml': {'train_shards': ['pipe:cat path/to/train/shards'], 'validation_shards': ['pipe:cat path/to/validation/shards'], 'base_model_path': 'lora/checkpoints/exact_base.ckpt', 'lora_rank': 32, 'lora_alpha': 32, 'lora_target_modules': ['attn1', 'attn2', 'ff.net', 'up_blocks', 'down_blocks'], 'trainable_lora_modules': ['attn1', 'attn2', 'up_blocks'], 'wandb_project': 'lbm-lora-relighting', 'batch_size': 4, 'learning_rate': 0.0002, 'optimizer': 'AdamW', 'save_ckpt_path': './checkpoints_lora/relighting', 'log_interval': 100, 'max_epochs': 50, 'save_interval': 1000, 'num_steps': [1, 2, 4]}, 'training': {'name': 'TrainingConfig', 'experiment_id': None, 'optimizer_name': 'AdamW', 'optimizer_kwargs': {}, 'learning_rate': 0.0002, 'lr_scheduler_name': None, 'lr_scheduler_kwargs': {}, 'lr_scheduler_interval': 'step', 'lr_scheduler_frequency': 1, 'metrics': None, 'tracking_metrics': None, 'backup_every': 50, 'trainable_params': ['.*'], 'log_keys': ['source_image', 'target_image'], 'log_samples_model_kwargs': {'num_steps': [1, 2, 4]}}}
+2025-09-24 11:30:58,088 INFO    wandb-AsyncioManager-main:514542 [service_client.py:_forward_responses():84] Reached EOF.
+2025-09-24 11:30:58,088 INFO    wandb-AsyncioManager-main:514542 [mailbox.py:close():137] Closing mailbox, abandoning 0 handles.

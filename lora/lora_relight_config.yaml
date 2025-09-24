@@ -6,20 +6,9 @@ validation_shards:
 # Path to the exact base model created by create_exact_base_model.py
 base_model_path: "lora/checkpoints/exact_base.ckpt"
 
-# Optional path to pre-existing LoRA weights to continue training
-# lora_weights_path: "lora/checkpoints/my_lora.safetensors"
+# Path to pre-existing LoRA weights to continue training.
+lora_weights_path: "lora/checkpoints/my_lora.safetensors"
 
-# LoRA specific parameters
-lora_rank: 32
-lora_alpha: 32
-# Defines which layers of the UNet get LoRA modules injected.
-# Common targets: "attn1" (self-attention), "attn2" (cross-attention), "ff.net" (feed-forward), "up_blocks", "down_blocks"
-lora_target_modules:
-  - "attn1"
-  - "attn2"
-  - "ff.net"
-  - "up_blocks"
-  - "down_blocks"
 
 # Defines which of the injected LoRA modules should be trained.
 # This allows you to freeze some LoRA layers while training others.
@@ -30,7 +19,7 @@ trainable_lora_modules:
   - "up_blocks"
 
 # Training parameters
-wandb_project: "lbm-lora-relighting"
+wandb_project: null
 batch_size: 4
 learning_rate: 0.0002
 optimizer: "AdamW"

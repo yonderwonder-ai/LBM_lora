@@ -62,33 +62,64 @@ python lora/inference_native.py \
   --verbose
 ```
 
-### 4. Train with LoRA (Optional)
-If you want to fine-tune a model using LoRA from scratch, you can use the provided training script.
+### 4. Fine-Tuning an Existing LoRA
+
+The provided script allows you to efficiently fine-tune an existing LoRA file. The script is designed to be intelligent and requires minimal configuration. It automatically infers the LoRA architecture (rank, alpha, and target modules) directly from the `.safetensors` file.
+
+The only manual step is to specify which of the LoRA layers you wish to train.
+
+**Step 1: Configure the Training**
+
+Open `lora/lora_relight_config.yaml` and configure your paths and training parameters. The key section is `trainable_lora_modules`.
+
+```yaml
+train_shards:
+  - "test_dataset/train_single.tar"
+validation_shards:
+  - "test_dataset/val_single.tar"
+
+# Path to the exact base model
+base_model_path: "lora/checkpoints/exact_base.ckpt"
+
+# Path to the pre-existing LoRA weights you want to fine-tune
+lora_weights_path: "lora/checkpoints/my_lora.safetensors"
+
+# Defines which of the injected LoRA modules should be trained.
+# Add the names of layers you want to train into this list.
+trainable_lora_modules:
+  - "attn1"
+  - "attn2"
+  - "up_blocks"
+
+# Training parameters
+wandb_project: null
+batch_size: 4
+learning_rate: 0.0002
+...
+```
+
+**Step 2: (Optional) Discover Trainable Layer Names**
+
+If you need to see all possible layer names that you can train, you can run the reconstruction test. This will generate a file named `lora/lora_layer_names.txt` containing a complete list of all LoRA modules found in your file.
 
 ```bash
-# First, customize the configuration file
-# open lora/lora_relight_config.yaml and set your dataset paths
+python lora/test_reconstruction_simple.py
+```
+You can then copy and paste names from this file into the `trainable_lora_modules` section of your config.
+
+**Step 3: Run the Training Script**
+
+Once your configuration is ready, start the training:
+
+```bash
+# Activate your LBM environment
+conda activate comfy
 
 # Run LoRA training
 python lora/train_lora.py --path_config lora/lora_relight_config.yaml
 ```
 
-### 5. Advanced LoRA Fine-Tuning
-You can control exactly which LoRA layers are trained by editing the `lora/lora_relight_config.yaml` file. This is useful for advanced fine-tuning, such as training only attention layers while keeping others frozen.
-
-1.  **Generate Layer Names**: First, run the reconstruction test script. This will create a file named `lora/lora_layer_names.txt` containing all possible LoRA layer names.
-    ```bash
-    python lora/test_reconstruction_simple.py
-    ```
-
-2.  **Configure Training**: Open `lora/lora_relight_config.yaml` and find the `trainable_lora_modules` section. Copy the names of the layers you want to train from `lora_layer_names.txt` into this list. You can use partial names to select groups of layers (e.g., `"attn1"` will select all self-attention layers).
-
-    **Example**: To train only the self-attention (`attn1`) and feed-forward (`ff.net`) layers:
-    ```yaml
-    trainable_lora_modules:
-      - "attn1"
-      - "ff.net"
-    ```
+The script will handle the rest: it will build a model with the correct LoRA architecture, load your weights, freeze the base model and non-targeted LoRA layers, and begin fine-tuning only the layers you specified.
 
 ## 🔧 Key Parameters
 

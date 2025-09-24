@@ -1,0 +1,100 @@
+config_yaml:
+  base_model_path: lora/checkpoints/exact_base.ckpt
+  batch_size: 4
+  learning_rate: 0.0002
+  log_interval: 100
+  lora_weights_path: lora/checkpoints/my_lora.safetensors
+  max_epochs: 50
+  num_steps:
+  - 1
+  - 2
+  - 4
+  optimizer: AdamW
+  save_ckpt_path: ./checkpoints_lora/relighting
+  save_interval: 1000
+  train_shards:
+  - test_dataset/train_single.tar
+  trainable_lora_modules:
+  - attn1
+  - attn2
+  - up_blocks
+  validation_shards:
+  - test_dataset/val_single.tar
+  wandb_project: null
+lora_config:
+  trainable_modules:
+  - attn1
+  - attn2
+  - up_blocks
+model_config:
+  bridge_noise_sigma: 0.005
+  input_key: image
+  latent_loss_type: l2
+  latent_loss_weight: 1.0
+  logit_mean: null
+  logit_std: null
+  mask_key: null
+  name: LBMConfig
+  pixel_loss_max_size: 512
+  pixel_loss_type: lpips
+  pixel_loss_weight: 10.0
+  prob:
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  selected_timesteps:
+  - 250.0
+  - 500.0
+  - 750.0
+  - 1000.0
+  source_key: source_image
+  target_key: target_image
+  timestep_sampling: custom_timesteps
+pipeline_config: !!python/object:lbm.trainer.training_config.TrainingConfig
+  backup_every: 50
+  experiment_id: null
+  learning_rate: 0.0002
+  log_keys:
+  - source_image
+  - target_image
+  log_samples_model_kwargs:
+    num_steps:
+    - 1
+    - 2
+    - 4
+  lr_scheduler_frequency: 1
+  lr_scheduler_interval: step
+  lr_scheduler_kwargs: {}
+  lr_scheduler_name: null
+  metrics: null
+  name: TrainingConfig
+  optimizer_kwargs: {}
+  optimizer_name: AdamW
+  tracking_metrics: null
+  trainable_params:
+  - .*lora.*
+training:
+  backup_every: 50
+  experiment_id: null
+  learning_rate: 0.0002
+  log_keys:
+  - source_image
+  - target_image
+  log_samples_model_kwargs:
+    num_steps:
+    - 1
+    - 2
+    - 4
+  lr_scheduler_frequency: 1
+  lr_scheduler_interval: step
+  lr_scheduler_kwargs: {}
+  lr_scheduler_name: null
+  metrics: null
+  name: TrainingConfig
+  optimizer_kwargs: {}
+  optimizer_name: AdamW
+  tracking_metrics: null
+  trainable_params:
+  - .*lora.*
+verbose: false

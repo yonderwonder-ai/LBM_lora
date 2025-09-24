@@ -98,7 +98,7 @@ learning_rate: 0.0002
 ...
 ```
 
-**Step 2: (Optional) Discover Trainable Layer Names**
+**Step 2: Discover Trainable Layer Names**
 
 If you need to see all possible layer names that you can train, you can run the reconstruction test. This will generate a file named `lora/lora_layer_names.txt` containing a complete list of all LoRA modules found in your file.
 

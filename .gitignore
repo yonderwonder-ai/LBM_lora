@@ -9,5 +9,4 @@ examples/inference/examples/*
 envs/*
 checkpoints/*
 *.sh# Test dataset
-test_dataset/
 test_checkpoints/
